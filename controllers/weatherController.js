@@ -15,7 +15,8 @@ Router.get('/', async (req, res) => {
         lat,
         long
     } = req.query;
-    axios.get(`https://api.openweathermap.org/data/2.5/forecast?&lat=${lat}&lon=${long}&appid=${API_KEY}&units=metric`)
+
+    axios.get(`https://api.openweathermap.org/data/2.5/forecast/daily?&lat=${lat}&lon=${long}&appid=${API_KEY}&units=metric`)
         .then(function (response) {
             res.send(response.data)
         })
