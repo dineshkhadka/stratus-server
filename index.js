@@ -6,6 +6,7 @@ const cors = require('cors');
 
 const backgroundController = require('./controllers/backgroundControllers');
 const weatherController = require('./controllers/weatherController');
+const quoteController = require('./controllers/quoteController');
 
 
 
@@ -22,6 +23,7 @@ app.use(cors());
 
 app.use('/api/background', backgroundController);
 app.use('/api/weather', weatherController);
+app.use('/api/quote', quoteController);
 app.get('/', function(req,res) {
     res.send('hello world')
 })
