@@ -7,6 +7,8 @@ const cors = require('cors');
 const backgroundController = require('./controllers/backgroundControllers');
 const weatherController = require('./controllers/weatherController');
 const quoteController = require('./controllers/quoteController');
+const geoLocationController = require('./controllers/geoLocationController');
+const reverseGeoLocationController = require('./controllers/reverseGeoLocationController');
 
 
 
@@ -24,6 +26,8 @@ app.use(cors());
 app.use('/api/background', backgroundController);
 app.use('/api/weather', weatherController);
 app.use('/api/quote', quoteController);
+app.use('/api/geo', geoLocationController);
+app.use('/api/reverse', reverseGeoLocationController);
 app.get('/', function(req,res) {
     res.send('hello world')
 })
