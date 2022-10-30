@@ -11,12 +11,17 @@ Router.get("/", async (req, res) => {
       `https://api.openweathermap.org/geo/1.0/direct?q=${place}&limit=5&appid=${API_KEY}`
     )
     .then(function (response) {
-      res.json({
-        name: response.data[0].name,
-        local_names: response.data[0].local_names,
-        lat: response.data[0].lat,
-        lon: response.data[0].lon
-      });
+      if (response.length > 0) {
+        res.json({
+          name: response.data[0].name,
+          local_names: response.data[0].local_names,
+          lat: response.data[0].lat,
+          lon: response.data[0].lon
+        });
+      }
+      else {
+        res.sendStatus(404);
+      }
     })
     .catch(function (error) {
       // handle error
