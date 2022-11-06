@@ -11,7 +11,8 @@ Router.get("/", async (req, res) => {
       `https://api.openweathermap.org/geo/1.0/direct?q=${place}&limit=5&appid=${API_KEY}`
     )
     .then(function (response) {
-      if (response.length > 0) {
+      console.log(response)
+      if (response.data.length > 0) {
         res.json({
           name: response.data[0].name,
           local_names: response.data[0].local_names,
@@ -20,7 +21,10 @@ Router.get("/", async (req, res) => {
         });
       }
       else {
-        res.sendStatus(404);
+        res.status(404).json({
+          status: 'error',
+          message: 'Not found'
+        });
       }
     })
     .catch(function (error) {
