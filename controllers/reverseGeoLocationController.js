@@ -1,7 +1,6 @@
 const express = require("express");
 const axios = require("axios");
 const Router = express.Router();
-
 var API_KEY = process.env.OPENWEATHERMAP_APIKEY;
 
 Router.get("/", async (req, res) => {
@@ -19,6 +18,7 @@ Router.get("/", async (req, res) => {
     .catch(function (error) {
       // handle error
       console.log(error);
+      res.send(500)
     });
 });
 

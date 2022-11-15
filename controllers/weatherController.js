@@ -19,7 +19,10 @@ Router.get('/', async (req, res) => {
             res.send(weatherDetails)
         })
         .catch(function (error) {
-            console.log(error);
+            res.status(500).json({
+              status: 'error',
+              message: 'Not found'
+            });
         })
 })
 

@@ -1,6 +1,7 @@
 const express = require("express");
 const axios = require("axios");
 const Router = express.Router();
+require('dotenv').config()
 
 var API_KEY = process.env.OPENWEATHERMAP_APIKEY;
 
@@ -11,7 +12,6 @@ Router.get("/", async (req, res) => {
       `https://api.openweathermap.org/geo/1.0/direct?q=${place}&limit=5&appid=${API_KEY}`
     )
     .then(function (response) {
-      console.log(response)
       if (response.data.length > 0) {
         res.json({
           name: response.data[0].name,
@@ -30,6 +30,7 @@ Router.get("/", async (req, res) => {
     .catch(function (error) {
       // handle error
       console.log(error);
+      res.send(500)
     });
 });
 
