@@ -2,7 +2,7 @@ const express = require("express");
 const axios = require("axios");
 const Router = express.Router();
 
-var API_KEY = `c1b928b71dc25eee21fde1cead132ae8`;
+var API_KEY = process.env.OPENWEATHERMAP_APIKEY;
 
 Router.get("/", async (req, res) => {
   let { place } = req.query;
