@@ -16,7 +16,9 @@ You can deploy your instance of the Stratus server with this button below
 
 ## Environment variables
 
-You will need use your Openweathermap and Unsplash API keys on the stratus dashboard and local .env
+You will need use your Openweathermap and Unsplash API keys on the Vercel dashboard and local .env
 
-```OPENWEATHERMAP_APIKEY = "API_KEY_HERE"
-UNSPLASH_APIKEY = "API_KEY_HERE"```
+```
+OPENWEATHERMAP_APIKEY = "API_KEY_HERE"
+UNSPLASH_APIKEY = "API_KEY_HERE"
+```
