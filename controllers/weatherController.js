@@ -4,7 +4,7 @@ const Router = express.Router();
 
 Router.get("/", async (req, res) => {
   let { lat, long, timezone } = req.query;
-  timezone = timezone || UTC;
+  timezone = timezone || "UTC";
   axios
     .get(
       `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&hourly=temperature_2m,precipitation&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_hours&current_weather=true&timeformat=unixtime&timezone=${timezone}`
