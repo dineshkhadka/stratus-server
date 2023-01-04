@@ -2,7 +2,7 @@ const express = require('express');
 const axios = require('axios');
 const Router = express.Router();
 
-const quotes = require("../api/quotes.json");
+const quotes = require("../data/quotes.json");
 
 Router.get('/', async (req, res) => {
     const sample = arr => {
