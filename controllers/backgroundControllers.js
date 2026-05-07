@@ -12,7 +12,11 @@ function randomPage(min, max) {
 }
 
 Router.get("/", async (req, res) => {
-  const collectionId = req.query.collection || '26321157';
+  const requestedCollection = req.query.collection;
+  const collectionId = requestedCollection && String(requestedCollection).trim() !== ''
+    ? String(requestedCollection).trim()
+    : '26321157';
+
   try {
     const collectionData = await axios.get(`${API_URL}/collections/${collectionId}/?client_id=${API_KEY}`);
     const totalPhotos = collectionData.data.total_photos;
@@ -23,7 +27,8 @@ Router.get("/", async (req, res) => {
     res.status(400).json({
       error: {
         code: 'COLLECTION_NOT_FOUND',
-        message: 'The specified collection does not exist or is not accessible.'
+        message: 'The specified collection does not exist or is not accessible.',
+        collection: collectionId
       }
     });
   }
