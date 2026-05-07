@@ -6,25 +6,27 @@ require("dotenv").config();
 const API_URL = `https://api.unsplash.com`;
 const API_KEY = process.env.UNSPLASH_APIKEY;
 const PER_PAGE = 10;
-const collection = `${API_URL}/collections/26321157/?client_id=${API_KEY}`;
 
 function randomPage(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
 Router.get("/", async (req, res) => {
-  const collectionData = await axios.get(collection);
-  await axios
-    .get(
-      `${API_URL}/collections/26321157/photos?page=${randomPage(1, Math.ceil(collectionData.data.total_photos / PER_PAGE))}&per_page=${PER_PAGE}&client_id=${API_KEY}`
-    )
-    .then(function (response) {
-      res.send(response.data);
-    })
-    .catch(function (error) {
-      console.log(error);
-      res.send(500);
+  const collectionId = req.query.collection || '26321157';
+  try {
+    const collectionData = await axios.get(`${API_URL}/collections/${collectionId}/?client_id=${API_KEY}`);
+    const totalPhotos = collectionData.data.total_photos;
+    const page = randomPage(1, Math.ceil(totalPhotos / PER_PAGE));
+    const photosResponse = await axios.get(`${API_URL}/collections/${collectionId}/photos?page=${page}&per_page=${PER_PAGE}&client_id=${API_KEY}`);
+    res.send(photosResponse.data);
+  } catch (error) {
+    res.status(400).json({
+      error: {
+        code: 'COLLECTION_NOT_FOUND',
+        message: 'The specified collection does not exist or is not accessible.'
+      }
     });
+  }
 });
 
 module.exports = Router;
